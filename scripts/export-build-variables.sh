@@ -13,7 +13,7 @@ else
   export ANDROID_PLATFORM=${DESIRED_ANDROID_API_LEVEL}
 fi
 
-export TOOLCHAIN_PATH=${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/${HOST_TAG}
+export TOOLCHAIN_PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${HOST_TAG}
 export SYSROOT_PATH=${TOOLCHAIN_PATH}/sysroot
 
 TARGET_TRIPLE_MACHINE_CC=

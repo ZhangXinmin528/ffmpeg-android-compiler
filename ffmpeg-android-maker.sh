@@ -3,7 +3,7 @@
 # Defining essential directories
 
 # The root of the project
-export BASE_DIR="$( cd "$( dirname "$0" )" && pwd )"
+export BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
 # Directory that contains source code for FFmpeg and its dependencies
 # Each library has its own subdirectory
 # Multiple versions of the same library can be stored inside librarie's directory
@@ -46,7 +46,7 @@ function prepareOutput() {
 # Otherwise the whole script is interrupted
 function checkTextRelocations() {
   TEXT_REL_STATS_FILE=${STATS_DIR}/text-relocations.txt
-  ${FAM_READELF} --dynamic ${BUILD_DIR_FFMPEG}/${ANDROID_ABI}/lib/*.so | grep 'TEXTREL\|File' >> ${TEXT_REL_STATS_FILE}
+  ${FAM_READELF} --dynamic ${BUILD_DIR_FFMPEG}/${ANDROID_ABI}/lib/*.so | grep 'TEXTREL\|File' >>${TEXT_REL_STATS_FILE}
 
   if grep -q TEXTREL ${TEXT_REL_STATS_FILE}; then
     echo "There are text relocations in output files:"
@@ -70,11 +70,10 @@ source ${SCRIPTS_DIR}/parse-arguments.sh
 
 # Treating FFmpeg as just a module to build after its dependencies
 COMPONENTS_TO_BUILD=${EXTERNAL_LIBRARIES[@]}
-COMPONENTS_TO_BUILD+=( "ffmpeg" )
+COMPONENTS_TO_BUILD+=("ffmpeg")
 
 # Get the source code of component to build
-for COMPONENT in ${COMPONENTS_TO_BUILD[@]}
-do
+for COMPONENT in ${COMPONENTS_TO_BUILD[@]}; do
   echo "Getting source code of the component: ${COMPONENT}"
   SOURCE_DIR_FOR_COMPONENT=${SOURCES_DIR}/${COMPONENT}
 
@@ -90,7 +89,7 @@ do
   # If it isn't set, consider SOURCE_DIR_FOR_COMPONENT as the proper value
   COMPONENT_SOURCES_DIR_VARIABLE=SOURCES_DIR_${COMPONENT}
   if [[ -z "${!COMPONENT_SOURCES_DIR_VARIABLE}" ]]; then
-     export SOURCES_DIR_${COMPONENT}=${SOURCE_DIR_FOR_COMPONENT}
+    export SOURCES_DIR_${COMPONENT}=${SOURCE_DIR_FOR_COMPONENT}
   fi
 
   # Returning to the rood directory. Just in case.
@@ -98,13 +97,11 @@ do
 done
 
 # Main build loop
-for ABI in ${FFMPEG_ABIS_TO_BUILD[@]}
-do
+for ABI in ${FFMPEG_ABIS_TO_BUILD[@]}; do
   # Exporting variables for the current ABI
   source ${SCRIPTS_DIR}/export-build-variables.sh ${ABI}
 
-  for COMPONENT in ${COMPONENTS_TO_BUILD[@]}
-  do
+  for COMPONENT in ${COMPONENTS_TO_BUILD[@]}; do
     echo "Building the component: ${COMPONENT}"
     COMPONENT_SOURCES_DIR_VARIABLE=SOURCES_DIR_${COMPONENT}
 

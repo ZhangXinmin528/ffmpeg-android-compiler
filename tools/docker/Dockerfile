@@ -15,7 +15,7 @@ ARG HOME_TWIN=/root
 
 # Creating mandatory environment variables
 ENV ANDROID_SDK_HOME=${HOME_TWIN}/android-sdk
-ENV ANDROID_NDK_HOME=${ANDROID_SDK_HOME}/ndk/${VERSION_NDK}
+ENV ANDROID_NDK_HOME=${ANDROID_SDK}/ndk/${VERSION_NDK}
 
 # Installing basic software
 RUN apt-get --allow-releaseinfo-change update && apt-get install -y --no-install-recommends \

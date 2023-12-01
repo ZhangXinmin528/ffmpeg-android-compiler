@@ -9,8 +9,8 @@ function checkVariablePresence() {
   fi
 }
 
-checkVariablePresence "ANDROID_SDK_HOME" \
+checkVariablePresence "ANDROID_SDK" \
   "The variable should be set to the actual Android SDK path" || exit 1
 
-checkVariablePresence "ANDROID_NDK_HOME" \
+checkVariablePresence "ANDROID_NDK" \
   "The variable should be set to the actual Android NDK path" || exit 1

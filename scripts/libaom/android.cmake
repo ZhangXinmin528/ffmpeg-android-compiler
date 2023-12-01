@@ -6,7 +6,7 @@ set(ANDROID_ARM_NEON TRUE)
 # Two variables have to be set before this line though:
 # ANDROID_PLATOFORM - the API level to compile against (number)
 # ANDROID_ABI - the ABI of the target platform
-include("$ENV{ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake")
+include("$ENV{ANDROID_NDK}/build/cmake/android.toolchain.cmake")
 
 # AS_EXECUTABLE (AV1 Codec Library's variable) should point to an assembler
 # For x86 and x86_64 ABIs it needs yasm
